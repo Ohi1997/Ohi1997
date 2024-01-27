@@ -14,9 +14,9 @@
 				<?php
 					$thumb = '';
 
-					$width = (int) apply_filters( 'et_pb_index_blog_image_width', 1080 );
+					$width = (int) apply_filters( 'et_pb_index_blog_image_width', 350 );
 
-					$height    = (int) apply_filters( 'et_pb_index_blog_image_height', 675 );
+					$height    = (int) apply_filters( 'et_pb_index_blog_image_height', 200 );
 					$classtext = 'et_pb_post_main_image';
 					$titletext = get_the_title();
 					$alttext   = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );

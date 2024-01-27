@@ -40,93 +40,108 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 						?>
 						<article id="post-<?php the_ID(); ?>" <?php post_class('et_pb_post'); ?>>
 							<?php if (('off' !== $show_default_title && $is_page_builder_used) || !$is_page_builder_used) { ?>
-								<div class="et_post_meta_wrapper">
-									<h1 class="entry-title"><?php the_title(); ?></h1>
+								<h1 class="entry-title"><?php the_title(); ?></h1>
+								<hr class="section-break">
+								<div class="et_post_meta_wrapper book-content">
+									<div class="book-content-left">
+										<?php
+										if (!post_password_required()) :
 
-									<?php
-									if (!post_password_required()) :
+											et_divi_post_meta();
 
-										et_divi_post_meta();
+											$thumb = '';
 
-										$thumb = '';
+											$width = (int) apply_filters('et_pb_index_blog_image_width', 450);
 
-										$width = (int) apply_filters('et_pb_index_blog_image_width', 1080);
+											$height = (int) apply_filters('et_pb_index_blog_image_height', 355);
+											$classtext = 'et_featured_image';
+											$titletext = get_the_title();
+											$alttext = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
+											$thumbnail = get_thumbnail($width, $height, $classtext, $alttext, $titletext, false, 'Blogimage');
+											$thumb = $thumbnail["thumb"];
 
-										$height = (int) apply_filters('et_pb_index_blog_image_height', 675);
-										$classtext = 'et_featured_image';
-										$titletext = get_the_title();
-										$alttext = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
-										$thumbnail = get_thumbnail($width, $height, $classtext, $alttext, $titletext, false, 'Blogimage');
-										$thumb = $thumbnail["thumb"];
+											$post_format = et_pb_post_format();
 
-										$post_format = et_pb_post_format();
-
-										if ('video' === $post_format && false !== ($first_video = et_get_first_video())) {
-											printf(
-												'<div class="et_main_video_container">
-											%1$s
-										</div>',
-												et_core_esc_previously($first_video)
-											);
-										} else if (!in_array($post_format, array('gallery', 'link', 'quote')) && 'on' === et_get_option('divi_thumbnails', 'on') && '' !== $thumb) {
-											print_thumbnail($thumb, $thumbnail["use_timthumb"], $alttext, $width, $height);
-										} else if ('gallery' === $post_format) {
-											et_pb_gallery_images();
-										}
-									?>
-
-									<?php
-										$text_color_class = et_divi_get_post_text_color();
-
-										$inline_style = et_divi_get_post_bg_inline_style();
-
-										switch ($post_format) {
-											case 'audio':
-												$audio_player = et_pb_get_audio_player();
-
-												if ($audio_player) {
-													printf(
-														'<div class="et_audio_content%1$s"%2$s>
-													%3$s
-												</div>',
-														esc_attr($text_color_class),
-														et_core_esc_previously($inline_style),
-														et_core_esc_previously($audio_player)
-													);
-												}
-
-												break;
-											case 'quote':
+											if ('video' === $post_format && false !== ($first_video = et_get_first_video())) {
 												printf(
-													'<div class="et_quote_content%2$s"%3$s>
+													'<div class="et_main_video_container">
 												%1$s
-											</div>',
-													et_core_esc_previously(et_get_blockquote_in_content()),
-													esc_attr($text_color_class),
-													et_core_esc_previously($inline_style)
+												</div>',
+													et_core_esc_previously($first_video)
 												);
+											} else if (!in_array($post_format, array('gallery', 'link', 'quote')) && 'on' === et_get_option('divi_thumbnails', 'on') && '' !== $thumb) {
+												print_thumbnail($thumb, $thumbnail["use_timthumb"], $alttext, $width, $height);
+											} else if ('gallery' === $post_format) {
+												et_pb_gallery_images();
+											}
+										?>
 
-												break;
-											case 'link':
-												printf(
-													'<div class="et_link_content%3$s"%4$s>
-												<a href="%1$s" class="et_link_main_url">%2$s</a>
-											</div>',
-													esc_url(et_get_link_url()),
-													esc_html(et_get_link_url()),
-													esc_attr($text_color_class),
-													et_core_esc_previously($inline_style)
-												);
+										<?php
+											$text_color_class = et_divi_get_post_text_color();
 
-												break;
-										}
+											$inline_style = et_divi_get_post_bg_inline_style();
 
-									endif;
-									?>
+											switch ($post_format) {
+												case 'audio':
+													$audio_player = et_pb_get_audio_player();
+
+													if ($audio_player) {
+														printf(
+															'<div class="et_audio_content%1$s"%2$s>
+														%3$s
+														</div>',
+															esc_attr($text_color_class),
+															et_core_esc_previously($inline_style),
+															et_core_esc_previously($audio_player)
+														);
+													}
+
+													break;
+												case 'quote':
+													printf(
+														'<div class="et_quote_content%2$s"%3$s>
+														%1$s
+														</div>',
+														et_core_esc_previously(et_get_blockquote_in_content()),
+														esc_attr($text_color_class),
+														et_core_esc_previously($inline_style)
+													);
+
+													break;
+												case 'link':
+													printf(
+														'<div class="et_link_content%3$s"%4$s>
+															<a href="%1$s" class="et_link_main_url">%2$s</a>
+															</div>',
+														esc_url(et_get_link_url()),
+														esc_html(et_get_link_url()),
+														esc_attr($text_color_class),
+														et_core_esc_previously($inline_style)
+													);
+
+													break;
+											}
+
+										endif;
+										?>
+									</div>
+									<div class="book-content-right">
+										<div class="book-details">
+											<h2 class="headline headline--medium">Book Details</h2>
+											<hr class="section-break">
+											<p><b>Book Edition:</b> <?php echo get_field('book_edition'); ?></p>
+											<p><b>ISBN:</b> <?php echo get_field('isbn'); ?></p>
+											<p><b>Language:</b> <?php echo get_field('language'); ?></p>
+											<p><b>PaperBack:</b> <?php echo get_field('paperback'); ?> pages</p>
+											<p><b>Publisher:</b> <?php echo get_field('publisher'); ?></p>
+											<p><b>Publish Date:</b> <?php echo get_field('publication_date'); ?></p>
+										</div>
+									</div>
 								</div>
 							<?php  } ?>
 
 							<div class="entry-content">
+								
 								<?php
 								do_action('et_before_content');
 
@@ -162,53 +177,29 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 
 					<?php endwhile; ?>
 
-					<div class="pdf-preview">
 
-						<?php
-						// Get the PDF file URL from the custom field
-						$pdf_link = get_post_meta(get_the_ID(), 'pdf_link', true);
-						print_r($pdf_link);
-
-						if ($pdf_link) {
-							echo '<iframe src="' . esc_url($pdf_link) . '" width="100%" height="600px"></iframe>';
-						} else {
-							echo '<p>No PDF available for preview.</p>';
-						}
-						?>
-					</div>
-					<div class="book-details">
-						<h2 class="headline headline--medium">Book Details</h2>
-						<hr class="section-break">
-						<p><b>Book Edition:</b> <?php echo get_field('book_edition'); ?></p>
-						<p><b>ISBN:</b> <?php echo get_field('isbn'); ?></p>
-						<p><b>Language:</b> <?php echo get_field('language'); ?></p>
-						<p><b>PaperBack:</b> <?php echo get_field('paperback'); ?> pages</p>
-						<p><b>Publisher:</b> <?php echo get_field('publisher'); ?></p>
-						<p><b>Publish Date:</b> <?php echo get_field('publication_date'); ?></p>
-					</div>
 					<div class="related-authors">
-
 						<?php
-						echo '<hr class="section-break">';
 						echo '<h2 class="headline headline--medium">Book Author(s)</h2>';
 						$relatedBookAuthors = get_field('related_authors');
 
-						foreach ($relatedBookAuthors as $author) { ?>
-
-							<ul class="link-list">
+						if (!empty($relatedBookAuthors)) {
+							echo '<ul class="author-grid">';
+							foreach ($relatedBookAuthors as $author) { ?>
 								<li class="list-author">
 									<a class="list-anchor" href="<?php echo get_the_permalink($author); ?>">
 										<img class="author-image" src="<?php echo get_the_post_thumbnail_url($author); ?>" alt="">
-										<span><?php echo get_the_title($author); ?></span>
+										<span class="author-name"><?php echo get_the_title($author); ?></span>
 									</a>
 								</li>
-							</ul>
 						<?php }
-
+							echo '</ul>';
+						} else {
+							echo '<p>No authors found for this book.</p>';
+						}
 						?>
-
-
 					</div>
+
 
 
 				</div>
