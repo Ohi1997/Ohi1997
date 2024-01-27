@@ -50,9 +50,9 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 
                                         $thumb = '';
 
-                                        $width = (int) apply_filters('et_pb_index_blog_image_width', 1080);
+                                        $width = (int) apply_filters('et_pb_index_blog_image_width', 550);
 
-                                        $height = (int) apply_filters('et_pb_index_blog_image_height', 675);
+                                        $height = (int) apply_filters('et_pb_index_blog_image_height', 320);
                                         $classtext = 'et_featured_image';
                                         $titletext = get_the_title();
                                         $alttext = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
@@ -161,7 +161,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
                         </article>
 
                     <?php endwhile; ?>
-                    
+
                     <div class="related-books">
 
                         <?php
@@ -183,13 +183,13 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
                         ));
 
                         if ($relatedBooks->have_posts()) {
-                            echo '<ul class="link-list">';
+                            echo '<ul class="book-grid">';
                             while ($relatedBooks->have_posts()) {
                                 $relatedBooks->the_post(); ?>
                                 <li class="list-book">
                                     <a class="list-anchor" href="<?php the_permalink(); ?>">
                                         <img class="book-image" src="<?php echo get_the_post_thumbnail_url(); ?>" alt="">
-                                        <span><?php the_title(); ?></span>
+                                        <span class="book-name"><?php the_title(); ?></span>
                                     </a>
                                 </li>
                         <?php }

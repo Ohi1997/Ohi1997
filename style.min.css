@@ -1670,6 +1670,56 @@ header.et-l.et-l--header:after {
   opacity: 0.8;
   transform: scale(1.1) rotate(4deg);
 }
-/* Test  */
+/* Css for single-author  */
+.related-books {
+  border: none;
+  border-top: 1px solid #2e2e2e;
+  margin: 2.5rem 0;
+}
 
-/* Test ends  */
+.related-books h2 {
+  margin: 0;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 300;
+  font-size: 1.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 15px;
+}
+
+.related-books .list-book {
+  list-style: none;
+}
+
+.related-books .book-image {
+  display: block;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.related-books .list-anchor {
+  color: white;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  background-color: #023768;
+  overflow: hidden;
+}
+
+.related-books .list-anchor .book-name{
+  margin: 10px;
+}
+
+.related-books .list-anchor:hover .book-image {
+  opacity: 0.8;
+  transform: scale(1.1) rotate(4deg);
+}
+
+.related-books .link-list a {
+  color: #ffffff;
+}
+
+/* ends  */

@@ -141,7 +141,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 							<?php  } ?>
 
 							<div class="entry-content">
-								
+
 								<?php
 								do_action('et_before_content');
 
