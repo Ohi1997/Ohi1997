@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div id="main-content"><h1>hello</h1>
+<div id="main-content">
 	<div class="container">
 		<div id="content-area" class="clearfix">
 			<div id="left-area">

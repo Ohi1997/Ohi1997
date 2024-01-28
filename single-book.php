@@ -51,9 +51,9 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 
 											$thumb = '';
 
-											$width = (int) apply_filters('et_pb_index_blog_image_width', 450);
+											$width = (int) apply_filters('et_pb_index_blog_image_width', 355);
 
-											$height = (int) apply_filters('et_pb_index_blog_image_height', 355);
+											$height = (int) apply_filters('et_pb_index_blog_image_height', 150);
 											$classtext = 'et_featured_image';
 											$titletext = get_the_title();
 											$alttext = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
@@ -129,14 +129,33 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 										<div class="book-details">
 											<h2 class="headline headline--medium">Book Details</h2>
 											<hr class="section-break">
-											<p><b>Book Edition:</b> <?php echo get_field('book_edition'); ?></p>
-											<p><b>ISBN:</b> <?php echo get_field('isbn'); ?></p>
-											<p><b>Language:</b> <?php echo get_field('language'); ?></p>
-											<p><b>PaperBack:</b> <?php echo get_field('paperback'); ?> pages</p>
-											<p><b>Publisher:</b> <?php echo get_field('publisher'); ?></p>
-											<p><b>Publish Date:</b> <?php echo get_field('publication_date'); ?></p>
+
+											<?php if (!empty(get_field('book_edition'))) : ?>
+												<p><b>Book Edition:</b> <?php echo get_field('book_edition'); ?></p>
+											<?php endif; ?>
+
+											<?php if (!empty(get_field('isbn'))) : ?>
+												<p><b>ISBN:</b> <?php echo get_field('isbn'); ?></p>
+											<?php endif; ?>
+
+											<?php if (!empty(get_field('language'))) : ?>
+												<p><b>Language:</b> <?php echo get_field('language'); ?></p>
+											<?php endif; ?>
+
+											<?php if (!empty(get_field('paperback'))) : ?>
+												<p><b>PaperBack:</b> <?php echo get_field('paperback'); ?> pages</p>
+											<?php endif; ?>
+
+											<?php if (!empty(get_field('publisher'))) : ?>
+												<p><b>Publisher:</b> <?php echo get_field('publisher'); ?></p>
+											<?php endif; ?>
+
+											<?php if (!empty(get_field('publication_date'))) : ?>
+												<p><b>Publish Date:</b> <?php echo get_field('publication_date'); ?></p>
+											<?php endif; ?>
 										</div>
 									</div>
+
 								</div>
 							<?php  } ?>
 
