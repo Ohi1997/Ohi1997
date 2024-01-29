@@ -1744,8 +1744,7 @@ header.et-l.et-l--header:after {
 }
 
 .related-books .list-anchor:hover .book-image {
-  opacity: 0.8;
-  transform: scale(1.1) rotate(4deg);
+  padding: 2px;
 }
 /* Css for single-author  */
 .related-books {
