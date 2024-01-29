@@ -40,101 +40,102 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
                         ?>
                         <article id="post-<?php the_ID(); ?>" <?php post_class('et_pb_post'); ?>>
                             <?php if (('off' !== $show_default_title && $is_page_builder_used) || !$is_page_builder_used) { ?>
-                                <div class="et_post_meta_wrapper">
-                                    <h1 class="entry-title"><?php the_title(); ?></h1>
+                                <h1 class="entry-title"><?php the_title(); ?></h1>
+                                <hr class="heading-section-break">
+                                <div class="et_post_meta_wrapper book-author-content">
+                                    <div class="book-author-left">
 
-                                    <?php
-                                    if (!post_password_required()) :
+                                        <?php
+                                        if (!post_password_required()) :
 
-                                        et_divi_post_meta();
+                                            et_divi_post_meta();
 
-                                        $thumb = '';
+                                            $thumb = '';
 
-                                        $width = (int) apply_filters('et_pb_index_blog_image_width', 400);
+                                            $width = (int) apply_filters('et_pb_index_blog_image_width', 400);
 
-                                        $height = (int) apply_filters('et_pb_index_blog_image_height', 200);
-                                        $classtext = 'et_featured_image';
-                                        $titletext = get_the_title();
-                                        $alttext = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
-                                        $thumbnail = get_thumbnail($width, $height, $classtext, $alttext, $titletext, false, 'Blogimage');
-                                        $thumb = $thumbnail["thumb"];
+                                            $height = (int) apply_filters('et_pb_index_blog_image_height', 200);
+                                            $classtext = 'et_featured_image';
+                                            $titletext = get_the_title();
+                                            $alttext = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
+                                            $thumbnail = get_thumbnail($width, $height, $classtext, $alttext, $titletext, false, 'Blogimage');
+                                            $thumb = $thumbnail["thumb"];
 
-                                        $post_format = et_pb_post_format();
+                                            $post_format = et_pb_post_format();
 
-                                        if ('video' === $post_format && false !== ($first_video = et_get_first_video())) {
-                                            printf(
-                                                '<div class="et_main_video_container">
+                                            if ('video' === $post_format && false !== ($first_video = et_get_first_video())) {
+                                                printf(
+                                                    '<div class="et_main_video_container">
 											%1$s
 										</div>',
-                                                et_core_esc_previously($first_video)
-                                            );
-                                        } else if (!in_array($post_format, array('gallery', 'link', 'quote')) && 'on' === et_get_option('divi_thumbnails', 'on') && '' !== $thumb) {
-                                            print_thumbnail($thumb, $thumbnail["use_timthumb"], $alttext, $width, $height);
-                                        } else if ('gallery' === $post_format) {
-                                            et_pb_gallery_images();
-                                        }
-                                    ?>
+                                                    et_core_esc_previously($first_video)
+                                                );
+                                            } else if (!in_array($post_format, array('gallery', 'link', 'quote')) && 'on' === et_get_option('divi_thumbnails', 'on') && '' !== $thumb) {
+                                                print_thumbnail($thumb, $thumbnail["use_timthumb"], $alttext, $width, $height);
+                                            } else if ('gallery' === $post_format) {
+                                                et_pb_gallery_images();
+                                            }
+                                        ?>
 
-                                    <?php
-                                        $text_color_class = et_divi_get_post_text_color();
+                                        <?php
+                                            $text_color_class = et_divi_get_post_text_color();
 
-                                        $inline_style = et_divi_get_post_bg_inline_style();
+                                            $inline_style = et_divi_get_post_bg_inline_style();
 
-                                        switch ($post_format) {
-                                            case 'audio':
-                                                $audio_player = et_pb_get_audio_player();
+                                            switch ($post_format) {
+                                                case 'audio':
+                                                    $audio_player = et_pb_get_audio_player();
 
-                                                if ($audio_player) {
-                                                    printf(
-                                                        '<div class="et_audio_content%1$s"%2$s>
+                                                    if ($audio_player) {
+                                                        printf(
+                                                            '<div class="et_audio_content%1$s"%2$s>
 													%3$s
 												</div>',
-                                                        esc_attr($text_color_class),
-                                                        et_core_esc_previously($inline_style),
-                                                        et_core_esc_previously($audio_player)
-                                                    );
-                                                }
+                                                            esc_attr($text_color_class),
+                                                            et_core_esc_previously($inline_style),
+                                                            et_core_esc_previously($audio_player)
+                                                        );
+                                                    }
 
-                                                break;
-                                            case 'quote':
-                                                printf(
-                                                    '<div class="et_quote_content%2$s"%3$s>
+                                                    break;
+                                                case 'quote':
+                                                    printf(
+                                                        '<div class="et_quote_content%2$s"%3$s>
 												%1$s
 											</div>',
-                                                    et_core_esc_previously(et_get_blockquote_in_content()),
-                                                    esc_attr($text_color_class),
-                                                    et_core_esc_previously($inline_style)
-                                                );
+                                                        et_core_esc_previously(et_get_blockquote_in_content()),
+                                                        esc_attr($text_color_class),
+                                                        et_core_esc_previously($inline_style)
+                                                    );
 
-                                                break;
-                                            case 'link':
-                                                printf(
-                                                    '<div class="et_link_content%3$s"%4$s>
+                                                    break;
+                                                case 'link':
+                                                    printf(
+                                                        '<div class="et_link_content%3$s"%4$s>
 												<a href="%1$s" class="et_link_main_url">%2$s</a>
 											</div>',
-                                                    esc_url(et_get_link_url()),
-                                                    esc_html(et_get_link_url()),
-                                                    esc_attr($text_color_class),
-                                                    et_core_esc_previously($inline_style)
-                                                );
+                                                        esc_url(et_get_link_url()),
+                                                        esc_html(et_get_link_url()),
+                                                        esc_attr($text_color_class),
+                                                        et_core_esc_previously($inline_style)
+                                                    );
 
-                                                break;
-                                        }
+                                                    break;
+                                            }
 
-                                    endif;
-                                    ?>
+                                        endif;
+                                        ?>
+                                    </div>
+                                    <div class="book-author-right">
+                                        <?php
+                                        echo get_the_content();
+                                        ?>
+                                    </div>
                                 </div>
                             <?php  } ?>
 
-                            <div class="entry-content">
-                                <?php
-                                do_action('et_before_content');
+                            <!-- I have removed entry-content div from here  -->
 
-                                the_content();
-
-                                wp_link_pages(array('before' => '<div class="page-links">' . esc_html__('Pages:', 'Divi'), 'after' => '</div>'));
-                                ?>
-                            </div>
                             <div class="et_post_meta_wrapper">
                                 <?php
                                 if (et_get_option('divi_468_enable') === 'on') {
@@ -165,7 +166,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
                     <div class="related-books">
 
                         <?php
-                        echo '<hr class="section-break">';  
+                        echo '<hr class="section-break">';
                         echo '<h2 class="headline headline--medium">Book(s)</h2>';
 
                         $relatedBooks = new WP_Query(array(

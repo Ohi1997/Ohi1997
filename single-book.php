@@ -41,7 +41,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 						<article id="post-<?php the_ID(); ?>" <?php post_class('et_pb_post'); ?>>
 							<?php if (('off' !== $show_default_title && $is_page_builder_used) || !$is_page_builder_used) { ?>
 								<h1 class="entry-title"><?php the_title(); ?></h1>
-								<hr class="section-break">
+								<hr class="heading-section-break">
 								<div class="et_post_meta_wrapper book-content">
 									<div class="book-content-left">
 										<?php
@@ -128,30 +128,30 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 									<div class="book-content-right">
 										<div class="book-details">
 											<h2 class="headline headline--medium">Book Details</h2>
-											<hr class="section-break">
+											<hr class="heading-section-break">
 
 											<?php if (!empty(get_field('book_edition'))) : ?>
-												<p><b>Book Edition:</b> <?php echo get_field('book_edition'); ?></p>
+												<p class="book-details-dash"><b>Book Edition:</b> <?php echo get_field('book_edition'); ?></p>
 											<?php endif; ?>
 
 											<?php if (!empty(get_field('isbn'))) : ?>
-												<p><b>ISBN:</b> <?php echo get_field('isbn'); ?></p>
+												<p class="book-details-dot"><b>ISBN:</b> <?php echo get_field('isbn'); ?></p>
 											<?php endif; ?>
 
 											<?php if (!empty(get_field('language'))) : ?>
-												<p><b>Language:</b> <?php echo get_field('language'); ?></p>
+												<p class="book-details-dash"><b>Language:</b> <?php echo get_field('language'); ?></p>
 											<?php endif; ?>
 
 											<?php if (!empty(get_field('paperback'))) : ?>
-												<p><b>PaperBack:</b> <?php echo get_field('paperback'); ?> pages</p>
+												<p class="book-details-dot"><b>PaperBack:</b> <?php echo get_field('paperback'); ?> pages</p>
 											<?php endif; ?>
 
 											<?php if (!empty(get_field('publisher'))) : ?>
-												<p><b>Publisher:</b> <?php echo get_field('publisher'); ?></p>
+												<p class="book-details-dash"><b>Publisher:</b> <?php echo get_field('publisher'); ?></p>
 											<?php endif; ?>
 
 											<?php if (!empty(get_field('publication_date'))) : ?>
-												<p><b>Publish Date:</b> <?php echo get_field('publication_date'); ?></p>
+												<p class="book-details-dot"><b>Publish Date:</b> <?php echo get_field('publication_date'); ?></p>
 											<?php endif; ?>
 										</div>
 									</div>
