@@ -1552,6 +1552,7 @@ header.et-l.et-l--header:after {
   color: #5a5a5a !important;
   line-height: 0;
   padding-top: 15px;
+  padding-bottom: 15px;
 }
 /* css for single-author  */
 .et_post_meta_wrapper.book-author-content {

@@ -143,7 +143,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 											<?php endif; ?>
 
 											<?php if (!empty(get_field('paperback'))) : ?>
-												<p class="book-details-dot"><b>PaperBack:</b> <?php echo get_field('paperback'); ?> pages</p>
+												<p class="book-details-dot"><b>Paperback:</b> <?php echo get_field('paperback'); ?> pages</p>
 											<?php endif; ?>
 
 											<?php if (!empty(get_field('publisher'))) : ?>
@@ -196,7 +196,6 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 
 					<?php endwhile; ?>
 
-
 					<div class="related-authors">
 						<?php
 						echo '<h2 class="headline headline--medium">Book Author(s)</h2>';
@@ -214,22 +213,63 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 						<?php }
 							echo '</ul>';
 						} else {
-							echo '<p>No authors found for this book.</p>';
+							echo '<p class="author-name">No authors found for this book.</p>';
 						}
 						?>
 					</div>
 
+					<div class="related-books">
+						<?php
+						echo '<hr class="section-break">';
+						echo '<h2 class="headline headline--medium">Related Books</h2>';
 
+						// Get the categories of the current book
+						$currentBookCategories = wp_get_post_terms(get_the_ID(), 'category', array('fields' => 'ids'));
+
+						// If the current book has categories, display related books from all categories excluding the current book
+						if (!empty($currentBookCategories)) {
+							$relatedBooks = new WP_Query(array(
+								'posts_per_page' => -1,
+								'post_type' => 'book',
+								'order' => 'ASC',
+								'orderby' => 'title',
+								'post__not_in' => array(get_the_ID()), // Excluding the current book by using it's ID
+								'tax_query' => array(
+									array(
+										'taxonomy' => 'category',
+										'field' => 'id',
+										'terms' => $currentBookCategories,
+										'operator' => 'IN',
+									),
+								),
+							));
+
+							if ($relatedBooks->have_posts()) {
+								echo '<ul class="book-grid">';
+								while ($relatedBooks->have_posts()) {
+									$relatedBooks->the_post(); ?>
+									<li class="list-book">
+										<a class="list-anchor" href="<?php the_permalink(); ?>">
+											<img class="book-image" src="<?php echo get_the_post_thumbnail_url(); ?>" alt="">
+											<span class="book-name"><?php the_title(); ?></span>
+										</a>
+									</li>
+						<?php }
+								echo '</ul>';
+								wp_reset_postdata();
+							} else {
+								echo '<p class="book-name">No related books found.</p>';
+							}
+						}
+						?>
+					</div>
 
 				</div>
-
 				<?php get_sidebar(); ?>
 			</div>
 		</div>
 	<?php endif; ?>
 
 </div>
-
 <?php
-
 get_footer();

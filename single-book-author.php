@@ -134,7 +134,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
                                 </div>
                             <?php  } ?>
 
-                            <!-- I have removed entry-content div from here  -->
+                            <!-- Removed entry-content div from here and saved to notepad -->
 
                             <div class="et_post_meta_wrapper">
                                 <?php
@@ -167,7 +167,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 
                         <?php
                         echo '<hr class="section-break">';
-                        echo '<h2 class="headline headline--medium">Book(s)</h2>';
+                        echo '<h2 class="headline headline--medium">Book(s) by '. get_the_title() .'</h2>';
 
                         $relatedBooks = new WP_Query(array(
                             'posts_per_page' => -1,
@@ -197,7 +197,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
                             echo '</ul>';
                             wp_reset_postdata();
                         } else {
-                            echo '<p>No books found by this author.</p>';
+                            echo '<p class="book-name">No books found by this author.</p>';
                         }
                         ?>
 
