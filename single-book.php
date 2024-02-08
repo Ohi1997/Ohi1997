@@ -217,7 +217,6 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 						}
 						?>
 					</div>
-
 					<div class="related-books">
 						<?php
 						echo '<hr class="section-break">';
@@ -263,7 +262,6 @@ $is_page_builder_used = et_pb_is_pagebuilder_used(get_the_ID());
 						}
 						?>
 					</div>
-
 				</div>
 				<?php get_sidebar(); ?>
 			</div>
